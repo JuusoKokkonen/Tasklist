@@ -1,5 +1,6 @@
 package com.example.tasklist.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,9 @@ public class Task {
 
     public Task() {}
 
+    @Column(name = "Description")
     private String desc;
+    
     private String status;
 
     public Task(final String desc, final String status, final User user) {
