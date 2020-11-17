@@ -25,15 +25,19 @@ public class User {
     @Column(name = "password", nullable = false)
     private String passwordHash;
 
+    @Column(name = "role", nullable = false)
+    private String role;
+
     public User() {}
 
     @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Task> tasks;
 
-    public User(String name, String passwordHash) {
+    public User(String name, String passwordHash, String role) {
         this.name = name;
         this.passwordHash = passwordHash;
+        this.role = role;
     }
 
 
@@ -61,7 +65,13 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
+    public String getRole() {
+        return this.role;
+    }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 
 }
 
