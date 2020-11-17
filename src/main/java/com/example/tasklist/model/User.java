@@ -1,17 +1,23 @@
 package com.example.tasklist.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
-    private long id;
+    @Column(name = "UserId", nullable = false, updatable = false)
+    private long UserId;
     
     @Column(name = "name", nullable = false, unique = true)
     private String name;
@@ -19,9 +25,11 @@ public class User {
     @Column(name = "password", nullable = false)
     private String passwordHash;
 
-    public User() {
+    public User() {}
 
-    }
+    @JsonBackReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Task> tasks;
 
     public User(String name, String passwordHash) {
         this.name = name;
@@ -29,12 +37,12 @@ public class User {
     }
 
 
-    public long getId() {
-        return this.id;
+    public long getUserId() {
+        return this.UserId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setUserId(long UserId) {
+        this.UserId = UserId;
     }
 
     public String getName() {
@@ -52,6 +60,7 @@ public class User {
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
+
 
 
 }

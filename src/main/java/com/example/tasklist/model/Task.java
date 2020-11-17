@@ -4,23 +4,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Task {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String task;
-    private String status;
+
+    @ManyToOne
+    @JoinColumn(name= "UserId")
+    @JsonManagedReference
+    private User user;
 
     public Task() {}
 
+    private String desc;
+    private String status;
 
-    public Task(String task, String status) {
-        this.task = task;
+    public Task(final String desc, final String status, final User user) {
+        super();
+        this.desc = desc;
         this.status = status;
+        this.user = user;
     }
-    
 
     public Long getId() {
         return this.id;
@@ -30,12 +40,20 @@ public class Task {
         this.id = id;
     }
 
-    public String getTask() {
-        return this.task;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setTask(String task) {
-        this.task = task;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getDesc() {
+        return this.desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getStatus() {
@@ -45,5 +63,6 @@ public class Task {
     public void setStatus(String status) {
         this.status = status;
     }
+    
     
 }

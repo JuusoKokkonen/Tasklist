@@ -2,6 +2,8 @@ package com.example.tasklist;
 
 import com.example.tasklist.model.Task;
 import com.example.tasklist.model.TaskRepository;
+import com.example.tasklist.model.User;
+import com.example.tasklist.model.UserRepository;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,14 +18,17 @@ public class TasklistApplication {
 	}
 
 	@Bean
-	public CommandLineRunner taskDemo(TaskRepository TaskRepository) {
+	public CommandLineRunner taskDemo(TaskRepository TaskRepository, UserRepository UserRepository) {
 
 		return (args) -> {
+		User user1 = new User("TestiUser", "Passu");
+		User user2 = new User("TESTI", "XDD");
+		UserRepository.save(user1);
+		UserRepository.save(user2);
 
-		Task task1 = new Task("Finish this project", "ToDo");
-		Task task2 = new Task("Test", "ToDo");
-		TaskRepository.save(task1);
-		TaskRepository.save(task2);
+		TaskRepository.save(new Task("Finish this project", "ToDo", UserRepository.findByName("TestiUser")));
+		TaskRepository.save(new Task("test", "ToDo", UserRepository.findByName("TESTI")));
+
 		};
 	}
 }

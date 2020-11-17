@@ -16,15 +16,14 @@ Tasklist
 </div>
 <table class="tabletable-striped">
     <tr>
-        <th>Author</th>
-        <th>Title</th>
-        <th>ISBN</th>
-        <th>Year</th>
-        <th>Category</th>
+        <th>Task</th>
+        <th>Status</th>
+        <th>User</th>
         </tr>
         <tr th:each= "task : ${tasks}">
-            <td  th:text="${task.task}"></td>
+            <td  th:text="${task.desc}"></td>
             <td  th:text="${task.status}"></td>
+            <td  th:text="${task.user.name}"></td>
         </tr>
     </table>
     <a href="/add" class="btn btn  -primary">Add Book</a>
