@@ -24,6 +24,7 @@ Tasklist
             <td  th:text="${task.desc}"></td>
             <td  th:text="${task.status}"></td>
             <td  th:text="${task.user.name}"></td>
+            <td><a th:href="@{/delete/{id}(id=${task.Id})}">Delete</a></td>
         </tr>
     </table>
     <a href="/add" class="btn btn  -primary">Add Book</a>

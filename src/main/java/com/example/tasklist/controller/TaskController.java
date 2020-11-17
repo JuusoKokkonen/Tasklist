@@ -51,6 +51,13 @@ public class TaskController {
         TaskRepository.save(task);
         return "redirect:tasklist";
     }
+    // Delete task
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteTask(@PathVariable("id") Long taskId, Model model) {
+        TaskRepository.deleteById(taskId);
+        model.addAttribute("categories", TaskRepository.findAll());
+        return "redirect:../tasklist";
+    }
 
     // RESTful service to get all tasks
     @RequestMapping(value = "/tasks", method = RequestMethod.GET)
